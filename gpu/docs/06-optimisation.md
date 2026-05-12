@@ -286,17 +286,16 @@ Matrix multiplication with hipBLAS
 
 # 3. Optimise memory accesses: Coalesce 
 
-- Device main memory accessed in batches of 64 or 128 bytes
-- If warp requests consecutive elements, then fewer global memory accesses are needed
-- Typically
+- Device main memory is accessed in batches of 64 or 128 bytes
+- If warp requests consecutive elements, hardware can combine (**coalesce**) the requests into 
+  fewer transactions
 
   |  |  |  |
   |--|--|--|
   | stride-1 | "`double val = global_mem[tid]`" | ***fast*** 🐇 |
   | stride-64 |"`double val = global_mem[tid*8]`" | ***slow*** 🐢 |
 
-- But access needn't be linear as long as the warp accesses consecutive elements in global memory!
-  - "`double val = global_mem[permutation_of_1_to_8[tid]]`" 🐇
+- Non-linear access is fine as long as the warp as a whole accesses consecutive elements in global memory
 
 ---
 
@@ -342,21 +341,168 @@ double val = global_array[tid];
 
 ---
 
-# 3. Oprimize memory accesses: LDS
+# Coalesced access with multidimensional thread blocks and grids
 
-- Variable defined as `__shared__` is shared within block 
+- Multidimensional thread blocks and grids have `threadIdx.[x|y|z]`, `blockIdx.[x|y|z]` *etc.*
+  indices
+- The first index `x` varies fastest contrary to C/C++ multidimensional array ordering
+    
+<small>
+<div class="column">
+**Uncoalesced access**
+```cpp
+__global__ void copy(int width, int height, float *A, float *B)
+{
+  auto x = blockIdx.x * blockDim.x + threadIdx.x;
+  auto y = blockIdx.y * blockDim.y + threadIdx.y;
+
+  auto index = x * height + y;
+
+  B[index] = A[index]
+}
+
+```
+</div>
+<div class="column">
+**Coalesced access**
+```cpp
+__global__ void copy(int width, int height, float *A, float *B)
+{
+  auto x = blockIdx.x * blockDim.x + threadIdx.x;
+  auto y = blockIdx.y * blockDim.y + threadIdx.y;
+
+  auto index = y * width + x;
+
+  B[index] = A[index]
+}
+
+```
+</div>
+</small>
+# 3. Optimize memory accesses: use LDS 
+
+- Accessing shared memory is faster than the global device memory
+- Shared within a block
+    - Synchronization with `__syncthreads()`
+- Amount of available shared memory depends on the architecture
 - Use cases:
-  - reduce overlapping global memory operations <br>$\Rightarrow$ Remember to `__syncthreads()`!
+  - reduce overlapping global memory operations
   - User controlled cache
-  - Transform uncoalesced memory OPs to coalesced
-- Usage:
-  ```cpp
+  - Transform uncoalesced memory operations to coalesced
+
+
+# 3. Optimize memory accesses: use LDS 
+- Shared memory is declared within the kernel with `__shared__` keyword
+- Shared memory can be static or dynamic
+    - kernel can have multiple shared memory arrays but only a single dynamic
+    - size of the dynamic shared memory is specified in the third argument in the kernel launch `kernel<<<blocks, threads, shmem>>>()`
+
+<small>
+<div class="column">
+**Static shared memory**
+```cpp
+__global__ void kernel(...)
+{
   __shared__ float buf[256];
-  ```
-- Divided in banks for parallel access
-  - one unique memory address access per bank per cycle
+  __shared__ int buf2[256];
+...
+}
+
+kernel<<<blocks, threads>>>(...)
+```
+</div>
+<div class="column">
+**Dynamic shared memory**
+```cpp
+__global__ void kernel(...)
+{
+  extern __shared__ float buf[];
+...
+}
+
+size_t shmem = n * sizeof(float) // given to kernel in bytes
+kernel<<<blocks, threads, shmem>>>(...)
+```
+</div>
+</small>
 
 ---
+
+# Example: Matrix transpose with shared memory (I)
+
+<small>
+<div class="column" style=width:55%>
+Naive implementation
+```cpp
+__global__ void transpose_kernel(float *in, float *out, 
+                                 int width, int height) {
+
+  int x_index = blockIdx.x * tile_dim + threadIdx.x;
+  int y_index = blockIdx.y * tile_dim + threadIdx.y;
+
+  int in_index = y_index * width + x_index;
+  int out_index = x_index * height + y_index;
+
+  out[out_index] = in[in_index];
+}
+```
+</div>
+<div class="column" style=width:42%>
+Either reads or writes are uncoalesced
+![](img/transpose_img.png){.center width=80%}
+</div>
+</small>
+
+# Example: Matrix transpose with shared memory (II)
+
+<small>
+<div class="column" style=width:55%>
+Implementation with shared memory
+```cpp
+__global__ void transpose__kernel(float *in, float *out, 
+                                  int width, int height) {
+
+  __shared__ float tile[tile_dim][tile_dim];
+
+  int x_tile_index = blockIdx.x * tile_dim;
+  int y_tile_index = blockIdx.y * tile_dim;
+
+  int in_index =
+      (y_tile_index + threadIdx.y) * width + (x_tile_index + threadIdx.x);
+  int out_index =
+      (x_tile_index + threadIdx.y) * height + (y_tile_index + threadIdx.x);
+
+  tile[threadIdx.y][threadIdx.x] = in[in_index];
+
+  __syncthreads();
+
+  out[out_index] = tile[threadIdx.x][threadIdx.y];
+}
+```
+</div>
+<div class="column" style=width:42%>
+Both reads and writes are coalesced
+![](img/transpose_sm.png){.center width=60%}
+</div>
+</small>
+
+# Other examples where shared memory is important
+
+- Matrix-matrix/vector multiplication
+ 
+  :::{.fragment}
+  - Same elements are loaded in different threads
+  :::
+- N-body problem
+ 
+  :::{.fragment}
+  - One thread evolves one body: each thread loads all data of each other body as well
+  :::
+- Reductions
+ 
+  :::{.fragment}
+  - Cooperation between threads
+  :::
 
 # 3. Optimize memory accesses: LDS - banked access
 
@@ -402,27 +548,13 @@ where `TYPE` is one of `int`, `unsigned int`, `unsigned long`, `unsigned long lo
 ::::::{.columns}
 :::{.column width=60%}
 - Both branches are executed sequentially
-  - In threads where the condition is false: 
 - If the branch changes only between warps, then there is no penalty
-- *Note*
-  - Code on right is memory bound
+- Branch divergence hurts most for compute bound or memory divergent branches
+- Memory bound branches with no divergence are less sensitive
 :::
 :::{.column width=39%}
 ```cpp
 if ( (tid%2) == 0) {
-  c[tid] = b[tid]-a[tid];
-} else {
-  c[tid] = a[tid]-b[tid];
-}
-```
-```cpp
-bool mask = (tid%2) == 0;
-c[tid] = mask*(b[tid]-a[tid]);
-c[tid] += (!mask)*(a[tid]-b[tid]);
-```
-"Solution"
-```cpp
-if ( ((tid/64)%2) == 0) {
   c[tid] = b[tid]-a[tid];
 } else {
   c[tid] = a[tid]-b[tid];
@@ -510,135 +642,6 @@ for(size_t k = 0; k < N; ++k)
   - Divide kernels mindfully
 :::
 
-# Example: Using local shared memory in matrix transpose{.section}
-
-# Matrix transpose
-
-- Naive: Either reads or writes are uncoalesced
-
-![](img/transpose_img.png){.center width=60%}
-
-# Copy operation as base
-
-```cpp
-__global__ void copy_kernel(float *in, float *out, int width, int height) {
-  int x_index = blockIdx.x * tile_dim + threadIdx.x;
-  int y_index = blockIdx.y * tile_dim + threadIdx.y;
-
-  int index = y_index * width + x_index;
-
-  out[index] = in[index];
-}
-```
-
-```cpp
-  int block_x = width / tile_dim;
-  int block_y = height / tile_dim;
-   hipLaunchKernelGGL(copy_kernel, dim3(block_x, block_y),
-                      dim3(tile_dim, tile_dim), 0, 0, d_in, d_out, width,
-                      height);
-   hipDeviceSynchronize();
-```
-The duration is `0.174 ms`  and the effective bandwidth `717 GB/s`
-
-# Matrix transpose naive
-
-```cpp
-__global__ void transpose_kernel(float *in, float *out, int width, int height) {
-  int x_index = blockIdx.x * tile_dim + threadIdx.x;
-  int y_index = blockIdx.y * tile_dim + threadIdx.y;
-
-  int in_index = y_index * width + x_index;
-  int out_index = x_index * height + y_index;
-
-  out[out_index] = in[in_index];
-}
-```
-
-
-The duration is `0.401 ms`  and the effective bandwidth `311 GB/s`
-
-
-
-
-# Matrix transpose with shared memory
-
-<small>
-
-```cpp
-__global__ void transpose_lds_kernel(float *in, float *out, int width,
-                                     int height) {
-  __shared__ float tile[tile_dim][tile_dim];
-
-  int x_tile_index = blockIdx.x * tile_dim;
-  int y_tile_index = blockIdx.y * tile_dim;
-
-  int in_index =
-      (y_tile_index + threadIdx.y) * width + (x_tile_index + threadIdx.x);
-  int out_index =
-      (x_tile_index + threadIdx.y) * height + (y_tile_index + threadIdx.x);
-
-  tile[threadIdx.y][threadIdx.x] = in[in_index];
-
-  __syncthreads();
-
-  out[out_index] = tile[threadIdx.x][threadIdx.y];
-}
-```
-
-</small>
-
-The duration is `0.185 ms`  and the effective bandwidth `674 GB/s`
-
-
-# Extra: Matrix transpose with shared memory without bank conflicts
-
-<small>
-```cpp
-__global__ void transpose_lds_kernel(float *in, float *out, int width,
-                                     int height) {
-  __shared__ float tile[tile_dim][tile_dim+1];
-
-  int x_tile_index = blockIdx.x * tile_dim;
-  int y_tile_index = blockIdx.y * tile_dim;
-
-  int in_index =
-      (y_tile_index + threadIdx.y) * width + (x_tile_index + threadIdx.x);
-  int out_index =
-      (x_tile_index + threadIdx.y) * height + (y_tile_index + threadIdx.x);
-
-  tile[threadIdx.y][threadIdx.x] = in[in_index];
-
-  __syncthreads();
-
-  out[out_index] = tile[threadIdx.x][threadIdx.y];
-}
-```
-</small>
-
-The duration is `0.179 ms`  and the effective bandwidth `697 GB/s`
-
-:::{.notes}
-- Timings on puhti NVidia V100
-:::
-
-# Other examples where shared memory is critical 
-
-- Matrix-matrix/vector multiplication
- si beh
-  :::{.fragment}
-  - Same elements are loaded in different threads
-  :::
-- N-body problem
- 
-  :::{.fragment}
-  - One thread evolves one body: each thread loads all data of each other body as well
-  :::
-- Reductions
- 
-  :::{.fragment}
-  - Cooperation between threads
-  :::
 
 # Summary
 
