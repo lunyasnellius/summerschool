@@ -4,13 +4,103 @@ event:  CSC Summer School in High-Performance Computing 2026
 lang:   en
 ---
 
-# Kernel optimisation strategies
+# Overview
+
+- General optimisation strategies
+- Optimizing memory access
+- Other GPU kernel optimisations
+
+# Measuring performance
+
+- Before starting any performance optimisation one needs to find out the current bottlenecks and where they occur
+- Typical bottlenecks
+    - host-device data transfers
+    - too little parallelism for GPUs
+    - unoptimal memory access
+    - unoptimal kernel code
+
+# Performance analysis tools
+
+- Applications own timing information
+    - can be useful for big picture
+    - GPU execution is asynchronous, remember to synchronize or use events
+- Performance analysis tools
+    - provide detailed information about the application
+    - find hot-spots (functions and loops)
+    - identify causes of less-than-ideal performance
+    - information about low-level hardware via performance counters
+- ROCProfiler and ROCm Compute Profiler, Nsight Systems and Nsight Compute
+- ScoreP, TAU, ...
+
+
+# Timers in application
+
+- As GPU kernels are run asynchronously, timers in application need to use events or explicit 
+  synchronization in measurements
+
+<div class="column">
+```cpp
+hipEventRecord(start);
+
+kernel<<<grid, block>>>(...);
+
+hipEventRecord(stop);
+
+hipEventSynchronize(stop);
+
+float ms = 0.0f;
+hipEventElapsedTime(&ms, start, stop);
+```
+- Measures only the time spent on GPU
+</div>
+<div class="column">
+```cpp
+auto start = clock();
+
+kernel<<<grid, block>>>(...);
+hipDeviceSynchronize();
+
+auto stop = clock();
+
+
+
+float ms = (stop - start) * 1e3;
+```
+- Measures also kernel launch latency
+</div>
+
+# Example: rocprof
+
+<small>
+```
+$ rocprofv3 ... --summary
+ROCPROFV3 SUMMARY:
+
+|                   NAME                   |     DOMAIN      |      CALLS      | DURATION (nsec) | AVERAGE (nsec)  | PERCENT (INC) |   MIN (nsec)    |   MAX (nsec)    |     STDDEV      |
+|------------------------------------------|-----------------|-----------------|-----------------|-----------------|---------------|-----------------|-----------------|-----------------|
+| hipLaunchKernel                          | HIP_API         |               4 |       434203887 |       1.086e+08 |     66.945517 |            4700 |       434182684 |       2.171e+08 |
+| hipDeviceSynchronize                     | HIP_API         |               4 |        85300133 |       2.133e+07 |     13.151567 |        12483534 |        29194539 |       8.923e+06 |
+| hipMalloc                                | HIP_API         |               1 |        44015742 |       4.402e+07 |      6.786343 |        44015742 |        44015742 |       0.000e+00 |
+| ternary_kernel(double*, int)             | KERNEL_DISPATCH |               1 |        29183576 |       2.918e+07 |      4.499521 |        29183576 |        29183576 |       0.000e+00 |
+| divergence_kernel(double*, int)          | KERNEL_DISPATCH |               1 |        28497647 |       2.850e+07 |      4.393765 |        28497647 |        28497647 |       0.000e+00 |
+| no_divergence_kernel(double*, int)       | KERNEL_DISPATCH |               1 |        14787390 |       1.479e+07 |      2.279919 |        14787390 |        14787390 |       0.000e+00 |
+| singlebranch_kernel(double*, int)        | KERNEL_DISPATCH |               1 |        12472800 |       1.247e+07 |      1.923055 |        12472800 |        12472800 |       0.000e+00 |
+| hipFree                                  | HIP_API         |               1 |          108380 |       1.084e+05 |      0.016710 |          108380 |          108380 |       0.000e+00 |
+| __hipRegisterFatBinary                   | HIP_API         |               1 |            9819 |       9.819e+03 |      0.001514 |            9819 |            9819 |       0.000e+00 |
+| __hipPushCallConfiguration               | HIP_API         |               4 |            6513 |       1.628e+03 |      0.001004 |             100 |            5431 |       2.556e+03 |
+| __hipRegisterFunction                    | HIP_API         |               4 |            5250 |       1.312e+03 |      0.000809 |             260 |            4148 |       1.894e+03 |
+| __hipPopCallConfiguration                | HIP_API         |               4 |            1784 |       4.460e+02 |      0.000275 |              90 |             871 |       3.994e+02 |
+
+```
+</small>
+
+# Optimisation strategies
 
 1. Minimise host-device data transfers
 2. Use existing libraries
-4. Optimise memory accesses
-5. Avoid branching within warp
-6. Minimise number of active local variables 
+3. Optimise memory accesses
+4. Avoid branching within warp
+5. Minimise number of active local variables 
 
 
 # 1. Host-device data transfers
@@ -35,32 +125,75 @@ lang:   en
 :::
 
 # 2. Libraries (I)
+- Optimized libraries can provide several orders of more performance
+
+<small>
+<div class="column">
+Naive matrix multiplication
+```cpp
+__global__ void matmul_kernel(int order, float *A, float *B, float *C)
+{
+  auto i = blockIdx.x * blockDim.x + threadIdx.x;
+  auto j = blockIdx.y * blockDim.y + threadIdx.y;
+
+  if ((i < order) && (j < order)) {
+    for(int k = 0; k < order; ++k) {
+      C[i+j*order] += A[i + k*order] * B[k + j*order];
+    }
+  }
+}
+
+matmul_kernel<<<dimGrid, dimBlock>>>(order, d_a, d_b, d_c);
+```
+- 2.8 s (LUMI, order=10 000)
+</div>
+<div class="column">
+Matrix multiplication with hipBLAS
+```cpp
+  hipblasHandle_t h;
+  hipblasCreate(&h);
+
+
+
+  hipblasDgemm(h, 
+               HIPBLAS_OP_N, HIPBLAS_OP_N,
+               order, order, order,
+               &alpha,            
+               d_a, order,          
+               d_b, order,
+               &beta, 
+               d_c, order);
+```
+- 0.05 s (LUMI, order=10 000)
+</div>
+</small>
 
 ::: notes
 
-- Before you optimize kernels, use libraries
+- Before you optimize, use libraries
 
 :::
 
+# Common libraries (I)
 | NVIDIA   | HIP       | ROCm       | Description                                                                         |
 | -------- | --------- | ---------- | ----------------------------------------------------------------------------------- |
 | cuBLAS   | hipBLAS   | rocBLAS    | Basic Linear Algebra Subroutines                                                    |
-| cuFFT    | hipFFT    | rocfft     | Fast fourier Transform Library                                                      |
+| cuFFT    | hipFFT    | rocfft     | Fast Fourier Transforms                                                             |
+| cuRAND   | hipRAND   | rocRAND    | Random number generation                                                            |
+| cuSOLVER | hipSOLVER | rocSOLVER  | Dense and sparse linear algebra (LAPACK)                                            |
+| Thrust   |           | rocThrust  | Parallel algorithms (C++ STL-like)                                                  |
+| CUB      | hipCUB    | rocPRIM    | Low level parallel primitives                                                       |
+
+
+# Common libraries (II)
+
+| NVIDIA   | HIP       | ROCm       | Description                                                                         |
+| -------- | --------- | ---------- | ----------------------------------------------------------------------------------- |
 | cuSPARSE | hipSPARSE | rocSPARSE  | Sparse BLAS + SMV                                                                   |
-| cuSOLVER | hipSOLVER | rocSOLVER  | Lapack library                                                                      |
 | AMG-X    |           | rocALUTION | Sparse iterative solvers and preconditioners with Geometric and Algebraic MultiGrid |
-| Thrust   |           | rocThrust  | C++ parallel algorithms library                                                     |
-
-
-# Libraries (II)
-
-| NVIDIA | HIP     | ROCm    | Description                                                                   |
-| ------ | ------- | ------- | ----------------------------------------------------------------------------- |
-| CUB    | hipCUB  | rocPRIM | Low level Optimized Parallel Primitives                                        |
-| cuDNN  |         | MIOpen  | Deep learning solver library                                                  |
-| cuRAND | hipRAND | rocRAND | Random number generator library                                               |
-| EIGEN  | EIGEN   | EIGEN   | C++ template library for linear algebra: matrices, vectors, numerical solvers |
-| NCCL   |         | RCCL    | Communications Primitives Library based on the MPI equivalents                |
+| EIGEN    | EIGEN     | EIGEN      | Linear algebra 
+| cuDNN    |           | MIOpen     | Deep neural network primitives
+| NCCL     |           | RCCL       | multi-GPU communication                                                             |
 
 
 
