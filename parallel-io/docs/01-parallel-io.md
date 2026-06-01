@@ -245,13 +245,7 @@ The most popular I/O libraries in HPC are **`HDF5`** and **`netCDF`**.
 - HDF5 files consist of *datasets* organized into *groups*, and their associated *metadata*
     - In practice, dataset = multidimensional array
 
-<div class="column">
-![](../hdf5-self-study/img/hdf5_structure.png)
-</div>
-
-<div class="column">
 ![](../hdf5-self-study/img/hdf5_dataset.png)
-</div>
 
 
 # Using HDF5
