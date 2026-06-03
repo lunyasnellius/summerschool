@@ -36,7 +36,7 @@ For example, many API calls require the programmer to configure their behavior b
 as function argument, but in many cases the default behavior is sufficient in which case we instead pass `H5P_DEFAULT`.
 
 Throughout these notes we will use the "standard" C-style API, accessible in C/C++ by including the header `hdf5.h`.
-Most API functions that create HDF5 objects (eg. file or dataset creation) return an integer identifier of type `hid_t`
+Most API functions that create HDF5 objects (e.g. file or dataset creation) return an integer identifier of type `hid_t`
 to the created resource, instead of returning a direct pointer to it. Likewise, functions that operate on HDF5 objects
 take in these IDs, or **handles**, as arguments. This is a somewhat common way of hiding implementation details of
 library objects or structs from the programmer. Some routines return an error code (integer of `herr_t` type) that can
@@ -120,13 +120,13 @@ information is important for portability between platforms.
 
 The pipeline for creating a fresh HDF5 file and writing a dataset proceeds roughly as follows:
 1. Create the file using [`H5Fcreate()`](https://docs.hdfgroup.org/archive/support/HDF5/doc/RM/RM_H5F.html#File-Create),
-with appropriate creation flags and configuration options (eg. access permissions).
+with appropriate creation flags and configuration options (e.g. access permissions).
 2. Create a [**dataspace**](https://support.hdfgroup.org/documentation/hdf5/latest/group___h5_s.html#ga8e35eea5738b4805856eac7d595254ae)
 to represent shape of the data. Usually we are interested in writing N-dimensional arrays; dataspaces corresponding to
 these are called "simple" in HDF5. A simple dataspace can be created with [`H5Screate_simple()`](https://support.hdfgroup.org/documentation/hdf5/latest/group___h5_s.html#ga8e35eea5738b4805856eac7d595254ae).
 3. Create a [**dataset**](https://support.hdfgroup.org/documentation/hdf5/latest/_h5_d__u_g.html) by calling
 [`H5Dcreate()`](https://docs.hdfgroup.org/archive/support/HDF5/doc/RM/RM_H5D.html#Dataset-Create). In this function call
-we specify which file this dataset is to be created in, type of data that we are storing (eg. integers of floats), and a
+we specify which file this dataset is to be created in, type of data that we are storing (e.g. integers of floats), and a
 valid dataspace for defining dataspace shape.
 4. Call [`H5Dwrite()`](https://docs.hdfgroup.org/archive/support/HDF5/doc/RM/RM_H5D.html#Dataset-Write) to write data to
 into the file.
@@ -142,11 +142,11 @@ The inputs required for writing are:
 This is specified using a dataspace object.
 - Destination data layout, ie. how the data is aligned *within* the file's dataset (**file space** argument).
 This is again specifed using a dataspace.
-- The dataset transfer property list. This can be used to configure various aspects of the I/O operation, eg. make the
+- The dataset transfer property list. This can be used to configure various aspects of the I/O operation, e.g. make the
 write a collective operation (more on this later). Can pass `H5P_DEFAULT` to use default transfer properties.
 - The source data buffer, ie. what data to write.
 
-The memspace and file space arguments are useful for doing partial I/O operations on a dataset, eg. write or read only
+The memspace and file space arguments are useful for doing partial I/O operations on a dataset, e.g. write or read only
 a small part of a large dataset. HDF5 provides a special keyword `H5S_ALL`, which when passed as *both* the memspace and
 file space arguments means that the entire dataset will be written to or read from. More specifically, dimensions of a
 dataset are fixed by the dataspace object that we used when creating the dataset `H5Dcreate()`. When `H5S_ALL` is used,
@@ -255,7 +255,7 @@ H5Fclose(fileId);
 ```
 
 If the types/names/shapes of stored data are unknown, we should query them from the file or dataset using the API.
-See eg. [`H5Dget_type`](https://docs.hdfgroup.org/archive/support/HDF5/doc/RM/RM_H5D.html#Dataset-GetType).
+See e.g. [`H5Dget_type`](https://docs.hdfgroup.org/archive/support/HDF5/doc/RM/RM_H5D.html#Dataset-GetType).
 The command line tools `h5ls` and `h5dump` can also be useful.
 
 
@@ -263,7 +263,7 @@ The command line tools `h5ls` and `h5dump` can also be useful.
 
 HDF5 [**attributes**](https://portal.hdfgroup.org/documentation/hdf5/latest/_h5_a__u_g.html) are a special data
 structure intended for storing arbitrary user-specified metadata. Usually the purpose of attributes is to describe
-what a dataset represents and how it was produced (eg. what simulation parameters were used).
+what a dataset represents and how it was produced (e.g. what simulation parameters were used).
 Such metadata *could* be stored as standard HDF5 datasets, however this can be inefficient because metadata is usually
 small compared the actual data. HDF5 attributes are similar to datasets, but optimized for small metadata that can be
 *attached* to datasets.
