@@ -323,7 +323,7 @@ slices of N-dimensional spaces. Hyperslabs are useful for doing I/O or data mani
 dataset.
 
 Hyperslab selection is organized in terms of **blocks** of dataspace elements (or grid points, if you prefer that analogy).
-Eg: for a 2D dataspace, block size of `(2, 2)` means we would select one or more subspaces, each containing 2x2 elements.
+E.g.: for a 2D dataspace, block size of `(2, 2)` means we would select one or more subspaces, each containing 2x2 elements.
 Block size of `(1, 1)` would mean we'd just select individual elements (default behavior). We can select hyperslabs (one
 or more) from a dataspace using [H5Sselect_hyperslab()](https://docs.hdfgroup.org/archive/support/HDF5/doc/RM/RM_H5S.html#Dataspace-SelectHyperslab).
 It takes in the following arguments:
