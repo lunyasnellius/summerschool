@@ -10,6 +10,10 @@
 # --- Replace with your username ---
 REMOTE_USER=""
 
+# Files are synced to /scratch/<summer school project>/$USER/$REMOTE_DIRECTORY.
+# You can change to this to something else if you wish.
+REMOTE_DIRECTORY="rsync"
+
 if [ ! -n "$REMOTE_USER" ]; then
     echo "ERROR: Edit the script and set REMOTE_USER as your csc username."
     exit 1
@@ -33,10 +37,10 @@ SYNC_DIRS=(
 # --- Remote config ---
 if [[ "$TARGET_REMOTE" == "lumi" ]]; then
     REMOTE_HOST="$REMOTE_USER@lumi.csc.fi"
-    REMOTE_ROOT="/scratch/project_462001452/$USER/rsync"
+    REMOTE_ROOT="/scratch/project_462001452/$USER/$REMOTE_DIRECTORY"
 elif [[ "$TARGET_REMOTE" == "mahti" ]]; then
     REMOTE_HOST="$REMOTE_USER@mahti.csc.fi"
-    REMOTE_ROOT="/scratch/project_2019219/$USER/rsync"
+    REMOTE_ROOT="/scratch/project_2019219/$USER/$REMOTE_DIRECTORY"
 fi
 
 # Rsync common options:
@@ -52,7 +56,7 @@ fi
 # -P : Show progress for each file
 # --delete : Remove remote files that are not present locally
 RSYNC_OPTS=(-avz
-    --exclude-from=".gitignore"
+    --exclude-from="$SCRIPT_DIR/../.gitignore"
     --exclude-from="$SCRIPT_DIR/.rsyncignore"
 )
 # Rsync version on Mahti is too old and does not support --mkpath. Parent directories must be created manually.
