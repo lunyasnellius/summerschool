@@ -15,7 +15,6 @@
 // Isend / Irecv with user defined datatypes
 void inline exchange_datatypes(Field& field, ParallelData& parallel)
 {
-    size_t buf_size;
     double *sbuf, *rbuf;
     // x-direction
     sbuf = field.temperature.data(1, 0, 0);
@@ -233,9 +232,9 @@ void exchange(Field& field, ParallelData& parallel)
     exchange_packing(field, parallel);
 #endif
 }
-    
 
-// Update the temperature values using five-point stencil */
+
+// Update the temperature values using five-point stencil
 void evolve(Field& curr, const Field& prev, const double a, const double dt)
 {
 
@@ -244,9 +243,6 @@ void evolve(Field& curr, const Field& prev, const double a, const double dt)
   auto inv_dy2 = 1.0 / (prev.dy * prev.dy);
   auto inv_dz2 = 1.0 / (prev.dz * prev.dz);
 
-  auto dx2 = (prev.dx * prev.dx);
-  auto dy2 = (prev.dy * prev.dy);
-  auto dz2 = (prev.dz * prev.dz);
   // Determine the temperature field at next time step
   // As we have fixed boundary conditions, the outermost gridpoints
   // are not updated.
@@ -256,9 +252,9 @@ void evolve(Field& curr, const Field& prev, const double a, const double dt)
 #pragma omp simd
       for (int k = 1; k < curr.nz + 1; k++) {
             curr(i, j, k) = prev(i, j, k) + a * dt * (
-	        ( prev(i + 1, j, k) - 2.0 * prev(i, j, k) + prev(i - 1, j, k) ) / (dx2) +
-	        ( prev(i, j + 1, k) - 2.0 * prev(i, j, k) + prev(i, j - 1, k) ) / (dy2) +
-	        ( prev(i, j, k + 1) - 2.0 * prev(i, j, k) + prev(i, j, k - 1) ) / (dz2) 
+	        ( prev(i + 1, j, k) - 2.0 * prev(i, j, k) + prev(i - 1, j, k) ) * inv_dx2 +
+	        ( prev(i, j + 1, k) - 2.0 * prev(i, j, k) + prev(i, j - 1, k) ) * inv_dy2 +
+	        ( prev(i, j, k + 1) - 2.0 * prev(i, j, k) + prev(i, j, k - 1) ) * inv_dz2
                );
       }
     }
