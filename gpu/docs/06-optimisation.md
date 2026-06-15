@@ -13,7 +13,7 @@ lang:   en
 We will cover the following topics
   \
   \
-  
+
 - Measuring performances
 - General optimisation strategies
 - Optimizing memory access
