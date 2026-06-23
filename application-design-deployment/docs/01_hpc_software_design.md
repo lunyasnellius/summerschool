@@ -40,7 +40,6 @@ Good project design helps you
 - **Target machines**: laptops, small clusters, supercomputers
     - OpenMP, MPI, MPI+OpenMP, GPUs
 - From shared memory to distributed memory machines
-    - Keep in mind that most machines are distributed memory systems = MPI
 - Moving from <1000 cores to >10k cores
     - Parallelisation strategies need to be considered
     - Non-blocking, avoiding global calls, ...
@@ -56,10 +55,11 @@ Good project design helps you
 - We only cover the surface today
 - The goal is to recognise the tools and know what to adopt as your software size increases
 
+# Section 1: Version control
 
 # Version control
 - Version control records the history of a project
-- It lets you
+- It lets you:
     - Track changes over time
     - Compare versions
     - Recover old states
@@ -68,14 +68,14 @@ Good project design helps you
 - In practice: **use Git**
 
 
-# Version control matters in HPC
+# Reproducibility matters in HPC
 - Production runs can consume large allocations
 - Later, you should know:
     - Which code version was used?
     - Which compiler, MPI, modules, and libraries were used?
     - Which input files and job scripts were used?
-    - Which changes happened after the run?
-- A commit hash or release tag is a simple anchor for reproducibility
+    - Which changes happened between two runs?
+- A commit hash or release tag is a simple anchor, but the run environment must also be recorded.
 
 
 # Git: distributed, but often used centrally
@@ -147,9 +147,10 @@ git push
 
 </div>
 
+# Section 2: Testing and CI/CD
 
 # Testing
-- Tests are executable checks that the software behaves as expected
+- Tests check that the software behaves as expected
 - Testing does not prove the code is perfect
 - It catches many mistakes before they reach production
 - HPC testing should cover e.g.:
@@ -228,31 +229,6 @@ In a training repository:
 </div>
 
 
-# Example GitHub Actions workflow
-```yaml
-name: build-test
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y build-essential cmake
-      - name: Configure
-        run: cmake -S . -B build
-      - name: Build
-        run: cmake --build build --parallel 2
-      - name: Test
-        run: ctest --test-dir build --output-on-failure
-```
-
-
 # Runners: provided or self-hosted?
 <div class=column>
 
@@ -284,6 +260,7 @@ jobs:
     - Before release or production campaign: target-machine validation
 - Do not run production-scale benchmarks as normal CI jobs
 
+# Section 3: Documentation
 
 # Documentation
 - Documentation is part of the software project
@@ -314,7 +291,7 @@ jobs:
     - Ingredients, temperatures, pan sizes
 - **Explanation**
     - Understanding-oriented
-    - Why eggs set when heated
+    - "Why eggs set when heated"
 
 </div>
 
@@ -326,25 +303,20 @@ jobs:
     - Run the first tiny simulation
 - **How-to**
     - Run on LUMI with Slurm
-    - Restart a failed job
-- **Reference**
-    - Input parameters
-    - Command-line options
-- **Explanation**
-    - E.g. The numerical methods or parallelisation strategy in your program
-    - "Why GPU performance depends on memory access patterns?"
+    - Restart from a checkpoint after a failed job
 
 </div>
 
 <div class=column>
 
+- **Reference**
+    - Input parameters
+    - Command-line options
+
 - **Explanation**
     - Numerical method
     - Parallelisation strategy
     - Performance model
-- Tools and places:
-    - `README.md`, Doxygen, GitHub/GitLab releases, video tutorials
-
 </div>
 
 # Minimum viable project checklist
