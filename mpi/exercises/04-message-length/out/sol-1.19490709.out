@@ -1,0 +1,6 @@
+Rank 1: Sending 4 integers to rank 0
+Rank 0: Received 4 integers from rank 1.
+receiveBuffer[0] : 0
+receiveBuffer[1] : 1
+receiveBuffer[2] : 2
+receiveBuffer[3] : 3

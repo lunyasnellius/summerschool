@@ -1,0 +1,48 @@
+Rank 1: Sending 9 integers to rank 0
+Rank 0: Received 9 integers from rank 1.
+receiveBuffer[0] : 0
+receiveBuffer[1] : 1
+receiveBuffer[2] : 2
+receiveBuffer[3] : 3
+receiveBuffer[4] : 4
+receiveBuffer[5] : 5
+receiveBuffer[6] : 6
+receiveBuffer[7] : 7
+receiveBuffer[8] : 8
+receiveBuffer[9] : 0
+Rank 1: Sending 6 integers to rank 0
+Rank 0: Received 6 integers from rank 1.
+receiveBuffer[0] : 0
+receiveBuffer[1] : 1
+receiveBuffer[2] : 2
+receiveBuffer[3] : 3
+receiveBuffer[4] : 4
+receiveBuffer[5] : 5
+receiveBuffer[6] : 0
+receiveBuffer[7] : 0
+receiveBuffer[8] : 0
+receiveBuffer[9] : 0
+Rank 1: Sending 3 integers to rank 0
+Rank 0: Received 3 integers from rank 1.
+receiveBuffer[0] : 0
+receiveBuffer[1] : 1
+receiveBuffer[2] : 2
+receiveBuffer[3] : 0
+receiveBuffer[4] : 0
+receiveBuffer[5] : 0
+receiveBuffer[6] : 0
+receiveBuffer[7] : 0
+receiveBuffer[8] : 0
+receiveBuffer[9] : 0
+Rank 1: Sending 7 integers to rank 0
+Rank 0: Received 7 integers from rank 1.
+receiveBuffer[0] : 0
+receiveBuffer[1] : 1
+receiveBuffer[2] : 2
+receiveBuffer[3] : 3
+receiveBuffer[4] : 4
+receiveBuffer[5] : 5
+receiveBuffer[6] : 6
+receiveBuffer[7] : 0
+receiveBuffer[8] : 0
+receiveBuffer[9] : 0
