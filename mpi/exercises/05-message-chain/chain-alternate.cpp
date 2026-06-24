@@ -42,17 +42,23 @@ int main(int argc, char *argv[]) {
     MPI_Barrier(MPI_COMM_WORLD);
     double t0 = MPI_Wtime();
 
+    if(rank%2 == 0) {
     MPI_Send(message.data(), numElements, MPI_INT, destination, rank+1, MPI_COMM_WORLD);
-
-
     printf("Sender: %d. Sent elements: %d. Tag: %d. Receiver: %d\n",
            rank, numElements, rank + 1, destination
     );
 
     MPI_Recv(receiveBuffer.data(), numElements, MPI_INT, source, rank, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
+    printf("Receiver: %d. first element %d\n", rank, receiveBuffer[0]);
+    } else {
+    MPI_Recv(receiveBuffer.data(), numElements, MPI_INT, source, rank, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     printf("Receiver: %d. first element %d\n", rank, receiveBuffer[0]);
 
+    MPI_Send(message.data(), numElements, MPI_INT, destination, rank+1, MPI_COMM_WORLD);
+    printf("Sender: %d. Sent elements: %d. Tag: %d. Receiver: %d\n",
+           rank, numElements, rank + 1, destination
+    );
+    }
 
     // Finalize measuring the time and print it out
     double t1 = MPI_Wtime();

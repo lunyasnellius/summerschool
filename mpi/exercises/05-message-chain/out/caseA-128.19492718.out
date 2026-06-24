@@ -1,0 +1,384 @@
+Sender: 0. Sent elements: 10000000. Tag: 1. Receiver: 1
+Receiver: 0. first element -1
+Sender: 1. Sent elements: 10000000. Tag: 2. Receiver: 2
+Receiver: 1. first element 0
+Sender: 2. Sent elements: 10000000. Tag: 3. Receiver: 3
+Receiver: 2. first element 1
+Sender: 3. Sent elements: 10000000. Tag: 4. Receiver: 4
+Receiver: 3. first element 2
+Sender: 4. Sent elements: 10000000. Tag: 5. Receiver: 5
+Receiver: 4. first element 3
+Sender: 5. Sent elements: 10000000. Tag: 6. Receiver: 6
+Receiver: 5. first element 4
+Sender: 6. Sent elements: 10000000. Tag: 7. Receiver: 7
+Receiver: 6. first element 5
+Sender: 7. Sent elements: 10000000. Tag: 8. Receiver: 8
+Receiver: 7. first element 6
+Sender: 8. Sent elements: 10000000. Tag: 9. Receiver: 9
+Receiver: 8. first element 7
+Sender: 9. Sent elements: 10000000. Tag: 10. Receiver: 10
+Receiver: 9. first element 8
+Sender: 10. Sent elements: 10000000. Tag: 11. Receiver: 11
+Receiver: 10. first element 9
+Sender: 11. Sent elements: 10000000. Tag: 12. Receiver: 12
+Receiver: 11. first element 10
+Sender: 12. Sent elements: 10000000. Tag: 13. Receiver: 13
+Receiver: 12. first element 11
+Sender: 13. Sent elements: 10000000. Tag: 14. Receiver: 14
+Receiver: 13. first element 12
+Sender: 14. Sent elements: 10000000. Tag: 15. Receiver: 15
+Receiver: 14. first element 13
+Sender: 15. Sent elements: 10000000. Tag: 16. Receiver: 16
+Receiver: 15. first element 14
+Sender: 16. Sent elements: 10000000. Tag: 17. Receiver: 17
+Receiver: 16. first element 15
+Sender: 17. Sent elements: 10000000. Tag: 18. Receiver: 18
+Receiver: 17. first element 16
+Sender: 18. Sent elements: 10000000. Tag: 19. Receiver: 19
+Receiver: 18. first element 17
+Sender: 19. Sent elements: 10000000. Tag: 20. Receiver: 20
+Receiver: 19. first element 18
+Sender: 20. Sent elements: 10000000. Tag: 21. Receiver: 21
+Receiver: 20. first element 19
+Sender: 21. Sent elements: 10000000. Tag: 22. Receiver: 22
+Receiver: 21. first element 20
+Sender: 22. Sent elements: 10000000. Tag: 23. Receiver: 23
+Receiver: 22. first element 21
+Sender: 23. Sent elements: 10000000. Tag: 24. Receiver: 24
+Receiver: 23. first element 22
+Sender: 24. Sent elements: 10000000. Tag: 25. Receiver: 25
+Receiver: 24. first element 23
+Sender: 25. Sent elements: 10000000. Tag: 26. Receiver: 26
+Receiver: 25. first element 24
+Sender: 26. Sent elements: 10000000. Tag: 27. Receiver: 27
+Receiver: 26. first element 25
+Sender: 27. Sent elements: 10000000. Tag: 28. Receiver: 28
+Receiver: 27. first element 26
+Sender: 28. Sent elements: 10000000. Tag: 29. Receiver: 29
+Receiver: 28. first element 27
+Sender: 29. Sent elements: 10000000. Tag: 30. Receiver: 30
+Receiver: 29. first element 28
+Sender: 30. Sent elements: 10000000. Tag: 31. Receiver: 31
+Receiver: 30. first element 29
+Sender: 31. Sent elements: 10000000. Tag: 32. Receiver: 32
+Receiver: 31. first element 30
+Sender: 32. Sent elements: 10000000. Tag: 33. Receiver: 33
+Receiver: 32. first element 31
+Sender: 33. Sent elements: 10000000. Tag: 34. Receiver: 34
+Receiver: 33. first element 32
+Sender: 34. Sent elements: 10000000. Tag: 35. Receiver: 35
+Receiver: 34. first element 33
+Sender: 35. Sent elements: 10000000. Tag: 36. Receiver: 36
+Receiver: 35. first element 34
+Sender: 36. Sent elements: 10000000. Tag: 37. Receiver: 37
+Receiver: 36. first element 35
+Sender: 37. Sent elements: 10000000. Tag: 38. Receiver: 38
+Receiver: 37. first element 36
+Sender: 38. Sent elements: 10000000. Tag: 39. Receiver: 39
+Receiver: 38. first element 37
+Sender: 39. Sent elements: 10000000. Tag: 40. Receiver: 40
+Receiver: 39. first element 38
+Sender: 40. Sent elements: 10000000. Tag: 41. Receiver: 41
+Receiver: 40. first element 39
+Sender: 41. Sent elements: 10000000. Tag: 42. Receiver: 42
+Receiver: 41. first element 40
+Sender: 42. Sent elements: 10000000. Tag: 43. Receiver: 43
+Receiver: 42. first element 41
+Sender: 43. Sent elements: 10000000. Tag: 44. Receiver: 44
+Receiver: 43. first element 42
+Sender: 44. Sent elements: 10000000. Tag: 45. Receiver: 45
+Receiver: 44. first element 43
+Sender: 45. Sent elements: 10000000. Tag: 46. Receiver: 46
+Receiver: 45. first element 44
+Sender: 46. Sent elements: 10000000. Tag: 47. Receiver: 47
+Receiver: 46. first element 45
+Sender: 47. Sent elements: 10000000. Tag: 48. Receiver: 48
+Receiver: 47. first element 46
+Sender: 48. Sent elements: 10000000. Tag: 49. Receiver: 49
+Receiver: 48. first element 47
+Sender: 49. Sent elements: 10000000. Tag: 50. Receiver: 50
+Receiver: 49. first element 48
+Sender: 50. Sent elements: 10000000. Tag: 51. Receiver: 51
+Receiver: 50. first element 49
+Sender: 51. Sent elements: 10000000. Tag: 52. Receiver: 52
+Receiver: 51. first element 50
+Sender: 52. Sent elements: 10000000. Tag: 53. Receiver: 53
+Receiver: 52. first element 51
+Sender: 53. Sent elements: 10000000. Tag: 54. Receiver: 54
+Receiver: 53. first element 52
+Sender: 54. Sent elements: 10000000. Tag: 55. Receiver: 55
+Receiver: 54. first element 53
+Sender: 55. Sent elements: 10000000. Tag: 56. Receiver: 56
+Receiver: 55. first element 54
+Sender: 56. Sent elements: 10000000. Tag: 57. Receiver: 57
+Receiver: 56. first element 55
+Sender: 57. Sent elements: 10000000. Tag: 58. Receiver: 58
+Receiver: 57. first element 56
+Sender: 58. Sent elements: 10000000. Tag: 59. Receiver: 59
+Receiver: 58. first element 57
+Sender: 59. Sent elements: 10000000. Tag: 60. Receiver: 60
+Receiver: 59. first element 58
+Sender: 60. Sent elements: 10000000. Tag: 61. Receiver: 61
+Receiver: 60. first element 59
+Sender: 61. Sent elements: 10000000. Tag: 62. Receiver: 62
+Receiver: 61. first element 60
+Sender: 62. Sent elements: 10000000. Tag: 63. Receiver: 63
+Receiver: 62. first element 61
+Sender: 63. Sent elements: 10000000. Tag: 64. Receiver: 64
+Receiver: 63. first element 62
+Sender: 64. Sent elements: 10000000. Tag: 65. Receiver: 65
+Receiver: 64. first element 63
+Sender: 65. Sent elements: 10000000. Tag: 66. Receiver: 66
+Receiver: 65. first element 64
+Sender: 66. Sent elements: 10000000. Tag: 67. Receiver: 67
+Receiver: 66. first element 65
+Sender: 67. Sent elements: 10000000. Tag: 68. Receiver: 68
+Receiver: 67. first element 66
+Sender: 68. Sent elements: 10000000. Tag: 69. Receiver: 69
+Receiver: 68. first element 67
+Sender: 69. Sent elements: 10000000. Tag: 70. Receiver: 70
+Receiver: 69. first element 68
+Sender: 70. Sent elements: 10000000. Tag: 71. Receiver: 71
+Receiver: 70. first element 69
+Sender: 71. Sent elements: 10000000. Tag: 72. Receiver: 72
+Receiver: 71. first element 70
+Sender: 72. Sent elements: 10000000. Tag: 73. Receiver: 73
+Receiver: 72. first element 71
+Sender: 73. Sent elements: 10000000. Tag: 74. Receiver: 74
+Receiver: 73. first element 72
+Sender: 74. Sent elements: 10000000. Tag: 75. Receiver: 75
+Receiver: 74. first element 73
+Sender: 75. Sent elements: 10000000. Tag: 76. Receiver: 76
+Receiver: 75. first element 74
+Sender: 76. Sent elements: 10000000. Tag: 77. Receiver: 77
+Receiver: 76. first element 75
+Sender: 77. Sent elements: 10000000. Tag: 78. Receiver: 78
+Receiver: 77. first element 76
+Sender: 78. Sent elements: 10000000. Tag: 79. Receiver: 79
+Receiver: 78. first element 77
+Sender: 79. Sent elements: 10000000. Tag: 80. Receiver: 80
+Receiver: 79. first element 78
+Sender: 80. Sent elements: 10000000. Tag: 81. Receiver: 81
+Receiver: 80. first element 79
+Sender: 81. Sent elements: 10000000. Tag: 82. Receiver: 82
+Receiver: 81. first element 80
+Sender: 82. Sent elements: 10000000. Tag: 83. Receiver: 83
+Receiver: 82. first element 81
+Sender: 83. Sent elements: 10000000. Tag: 84. Receiver: 84
+Receiver: 83. first element 82
+Sender: 84. Sent elements: 10000000. Tag: 85. Receiver: 85
+Receiver: 84. first element 83
+Sender: 85. Sent elements: 10000000. Tag: 86. Receiver: 86
+Receiver: 85. first element 84
+Sender: 86. Sent elements: 10000000. Tag: 87. Receiver: 87
+Receiver: 86. first element 85
+Sender: 87. Sent elements: 10000000. Tag: 88. Receiver: 88
+Receiver: 87. first element 86
+Sender: 88. Sent elements: 10000000. Tag: 89. Receiver: 89
+Receiver: 88. first element 87
+Sender: 89. Sent elements: 10000000. Tag: 90. Receiver: 90
+Receiver: 89. first element 88
+Sender: 90. Sent elements: 10000000. Tag: 91. Receiver: 91
+Receiver: 90. first element 89
+Sender: 91. Sent elements: 10000000. Tag: 92. Receiver: 92
+Receiver: 91. first element 90
+Sender: 92. Sent elements: 10000000. Tag: 93. Receiver: 93
+Receiver: 92. first element 91
+Sender: 93. Sent elements: 10000000. Tag: 94. Receiver: 94
+Receiver: 93. first element 92
+Sender: 94. Sent elements: 10000000. Tag: 95. Receiver: 95
+Receiver: 94. first element 93
+Sender: 95. Sent elements: 10000000. Tag: 96. Receiver: 96
+Receiver: 95. first element 94
+Sender: 96. Sent elements: 10000000. Tag: 97. Receiver: 97
+Receiver: 96. first element 95
+Sender: 97. Sent elements: 10000000. Tag: 98. Receiver: 98
+Receiver: 97. first element 96
+Sender: 98. Sent elements: 10000000. Tag: 99. Receiver: 99
+Receiver: 98. first element 97
+Sender: 99. Sent elements: 10000000. Tag: 100. Receiver: 100
+Receiver: 99. first element 98
+Sender: 100. Sent elements: 10000000. Tag: 101. Receiver: 101
+Receiver: 100. first element 99
+Sender: 101. Sent elements: 10000000. Tag: 102. Receiver: 102
+Receiver: 101. first element 100
+Sender: 102. Sent elements: 10000000. Tag: 103. Receiver: 103
+Receiver: 102. first element 101
+Sender: 103. Sent elements: 10000000. Tag: 104. Receiver: 104
+Receiver: 103. first element 102
+Sender: 104. Sent elements: 10000000. Tag: 105. Receiver: 105
+Receiver: 104. first element 103
+Sender: 105. Sent elements: 10000000. Tag: 106. Receiver: 106
+Receiver: 105. first element 104
+Sender: 106. Sent elements: 10000000. Tag: 107. Receiver: 107
+Receiver: 106. first element 105
+Sender: 107. Sent elements: 10000000. Tag: 108. Receiver: 108
+Receiver: 107. first element 106
+Sender: 108. Sent elements: 10000000. Tag: 109. Receiver: 109
+Receiver: 108. first element 107
+Sender: 109. Sent elements: 10000000. Tag: 110. Receiver: 110
+Receiver: 109. first element 108
+Sender: 110. Sent elements: 10000000. Tag: 111. Receiver: 111
+Receiver: 110. first element 109
+Sender: 111. Sent elements: 10000000. Tag: 112. Receiver: 112
+Receiver: 111. first element 110
+Sender: 112. Sent elements: 10000000. Tag: 113. Receiver: 113
+Receiver: 112. first element 111
+Sender: 113. Sent elements: 10000000. Tag: 114. Receiver: 114
+Receiver: 113. first element 112
+Sender: 114. Sent elements: 10000000. Tag: 115. Receiver: 115
+Receiver: 114. first element 113
+Sender: 115. Sent elements: 10000000. Tag: 116. Receiver: 116
+Receiver: 115. first element 114
+Sender: 116. Sent elements: 10000000. Tag: 117. Receiver: 117
+Receiver: 116. first element 115
+Sender: 117. Sent elements: 10000000. Tag: 118. Receiver: 118
+Receiver: 117. first element 116
+Sender: 118. Sent elements: 10000000. Tag: 119. Receiver: 119
+Receiver: 118. first element 117
+Sender: 119. Sent elements: 10000000. Tag: 120. Receiver: 120
+Receiver: 119. first element 118
+Sender: 120. Sent elements: 10000000. Tag: 121. Receiver: 121
+Receiver: 120. first element 119
+Sender: 121. Sent elements: 10000000. Tag: 122. Receiver: 122
+Receiver: 121. first element 120
+Sender: 122. Sent elements: 10000000. Tag: 123. Receiver: 123
+Receiver: 122. first element 121
+Sender: 123. Sent elements: 10000000. Tag: 124. Receiver: 124
+Receiver: 123. first element 122
+Sender: 124. Sent elements: 10000000. Tag: 125. Receiver: 125
+Receiver: 124. first element 123
+Sender: 125. Sent elements: 10000000. Tag: 126. Receiver: 126
+Receiver: 125. first element 124
+Sender: 126. Sent elements: 10000000. Tag: 127. Receiver: 127
+Receiver: 126. first element 125
+Sender: 127. Sent elements: 10000000. Tag: 128. Receiver: -1
+Receiver: 127. first element 126
+Time elapsed in rank  0:  4.540
+Time elapsed in rank  1:  4.540
+Time elapsed in rank  2:  4.505
+Time elapsed in rank  3:  4.470
+Time elapsed in rank  4:  4.435
+Time elapsed in rank  5:  4.400
+Time elapsed in rank  6:  4.365
+Time elapsed in rank  7:  4.330
+Time elapsed in rank  8:  4.295
+Time elapsed in rank  9:  4.259
+Time elapsed in rank 10:  4.224
+Time elapsed in rank 11:  4.189
+Time elapsed in rank 12:  4.154
+Time elapsed in rank 13:  4.118
+Time elapsed in rank 14:  4.083
+Time elapsed in rank 15:  4.047
+Time elapsed in rank 16:  4.012
+Time elapsed in rank 17:  3.976
+Time elapsed in rank 18:  3.941
+Time elapsed in rank 19:  3.905
+Time elapsed in rank 20:  3.870
+Time elapsed in rank 21:  3.834
+Time elapsed in rank 22:  3.799
+Time elapsed in rank 23:  3.763
+Time elapsed in rank 24:  3.727
+Time elapsed in rank 25:  3.692
+Time elapsed in rank 26:  3.656
+Time elapsed in rank 27:  3.621
+Time elapsed in rank 28:  3.585
+Time elapsed in rank 29:  3.549
+Time elapsed in rank 30:  3.513
+Time elapsed in rank 31:  3.477
+Time elapsed in rank 32:  3.441
+Time elapsed in rank 33:  3.405
+Time elapsed in rank 34:  3.369
+Time elapsed in rank 35:  3.333
+Time elapsed in rank 36:  3.297
+Time elapsed in rank 37:  3.261
+Time elapsed in rank 38:  3.225
+Time elapsed in rank 39:  3.189
+Time elapsed in rank 40:  3.153
+Time elapsed in rank 41:  3.117
+Time elapsed in rank 42:  3.082
+Time elapsed in rank 43:  3.047
+Time elapsed in rank 44:  3.011
+Time elapsed in rank 45:  2.976
+Time elapsed in rank 46:  2.941
+Time elapsed in rank 47:  2.906
+Time elapsed in rank 48:  2.871
+Time elapsed in rank 49:  2.835
+Time elapsed in rank 50:  2.799
+Time elapsed in rank 51:  2.764
+Time elapsed in rank 52:  2.728
+Time elapsed in rank 53:  2.692
+Time elapsed in rank 54:  2.656
+Time elapsed in rank 55:  2.621
+Time elapsed in rank 56:  2.584
+Time elapsed in rank 57:  2.549
+Time elapsed in rank 58:  2.513
+Time elapsed in rank 59:  2.477
+Time elapsed in rank 60:  2.441
+Time elapsed in rank 61:  2.405
+Time elapsed in rank 62:  2.368
+Time elapsed in rank 63:  2.332
+Time elapsed in rank 64:  2.296
+Time elapsed in rank 65:  2.258
+Time elapsed in rank 66:  2.223
+Time elapsed in rank 67:  2.187
+Time elapsed in rank 68:  2.151
+Time elapsed in rank 69:  2.116
+Time elapsed in rank 70:  2.080
+Time elapsed in rank 71:  2.045
+Time elapsed in rank 72:  2.009
+Time elapsed in rank 73:  1.972
+Time elapsed in rank 74:  1.937
+Time elapsed in rank 75:  1.901
+Time elapsed in rank 76:  1.865
+Time elapsed in rank 77:  1.829
+Time elapsed in rank 78:  1.793
+Time elapsed in rank 79:  1.757
+Time elapsed in rank 80:  1.721
+Time elapsed in rank 81:  1.685
+Time elapsed in rank 82:  1.649
+Time elapsed in rank 83:  1.613
+Time elapsed in rank 84:  1.577
+Time elapsed in rank 85:  1.540
+Time elapsed in rank 86:  1.504
+Time elapsed in rank 87:  1.468
+Time elapsed in rank 88:  1.431
+Time elapsed in rank 89:  1.395
+Time elapsed in rank 90:  1.359
+Time elapsed in rank 91:  1.323
+Time elapsed in rank 92:  1.287
+Time elapsed in rank 93:  1.251
+Time elapsed in rank 94:  1.215
+Time elapsed in rank 95:  1.179
+Time elapsed in rank 96:  1.143
+Time elapsed in rank 97:  1.106
+Time elapsed in rank 98:  1.070
+Time elapsed in rank 99:  1.034
+Time elapsed in rank 100:  0.999
+Time elapsed in rank 101:  0.963
+Time elapsed in rank 102:  0.927
+Time elapsed in rank 103:  0.892
+Time elapsed in rank 104:  0.856
+Time elapsed in rank 105:  0.821
+Time elapsed in rank 106:  0.785
+Time elapsed in rank 107:  0.750
+Time elapsed in rank 108:  0.714
+Time elapsed in rank 109:  0.679
+Time elapsed in rank 110:  0.643
+Time elapsed in rank 111:  0.607
+Time elapsed in rank 112:  0.571
+Time elapsed in rank 113:  0.535
+Time elapsed in rank 114:  0.499
+Time elapsed in rank 115:  0.463
+Time elapsed in rank 116:  0.427
+Time elapsed in rank 117:  0.391
+Time elapsed in rank 118:  0.355
+Time elapsed in rank 119:  0.318
+Time elapsed in rank 120:  0.282
+Time elapsed in rank 121:  0.246
+Time elapsed in rank 122:  0.210
+Time elapsed in rank 123:  0.175
+Time elapsed in rank 124:  0.140
+Time elapsed in rank 125:  0.106
+Time elapsed in rank 126:  0.071
+Time elapsed in rank 127:  0.036
