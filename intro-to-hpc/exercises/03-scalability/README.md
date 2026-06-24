@@ -11,13 +11,13 @@ In this exercise we practise performing a scalability analysis of a simulation c
 We analyse the scalability provided three-dimensional heat equation solver under [heat-equation-3d](heat-equation-3d)
 by running the code with different node counts and collect the data systematically in the table below:
 
-| Nodes | Runtime (s) | Resource cost (Node-s) | Speedup | Parallel efficiency | Electricity cost (Wh) | Monetary cost (€) |
+| Nodes | Runtime (s) | Resource cost (Node-s) | Speedup | Parallel efficiency | Electricity cost (Wh)  | Monetary cost (€) |
 | ----: | ----------: | ---------------------: | ------: | ------------------: | ---------------------: | ----------------: |
-|    1  |             |                        |         |                     |                        |                   |
-|    2  |             |                        |         |                     |                        |                   |
-|    4  |             |                        |         |                     |                        |                   |
-|    8  |             |                        |         |                     |                        |                   |
-|   16  |             |                        |         |                     |                        |                   |
+|    1  |   31.5      |     31.5               |  1.00   |      1.00           |    5.3                 |   3.5             |
+|    2  |   17.1      |     34.2               |  1.84   |      0.92           |    5.7                 |   3.8             |
+|    4  |   10.0      |     40.0               |  3.14   |      0.79           |    6.7                 |   4.5             |
+|    8  |    5.6      |     44.8               |  5.63   |      0.70           |    7.5                 |   5.0             |
+|   16  |    3.4      |     54.4               |  9.26   |      0.58           |    9.1                 |   6.1             |
 
 The columns are calculated from the node count and the runtime as follows
 ($T_1$ is the runtime with a single node and $T_n$ is the runtime with $n$ nodes):
