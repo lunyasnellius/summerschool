@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 	if(rank%2 == 0) {
 		MPI_Send(send_message, msg_size, MPI_INT, to_rank, rank, MPI_COMM_WORLD);
 	} else {
-		MPI_Recv(recv_message, msg_size, MPI_INT, from_rank, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		MPI_Recv(recv_message, msg_size-2, MPI_INT, from_rank, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 	}
 	if(rank%2 == 0) {
 		MPI_Recv(recv_message, msg_size, MPI_INT, from_rank, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);

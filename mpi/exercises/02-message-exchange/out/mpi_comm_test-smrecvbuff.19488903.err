@@ -1,0 +1,30 @@
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_vx=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for this output (/opt/cray/pe/lmod/lmod/init/bash)
+Shell debugging restarted
++ unset __lmod_vx
++ srun sendrecv
+MPICH ERROR [Rank 1] [job id 19488903.0] [Wed Jun 24 13:20:26 2026] [nid002510] - Abort(336187406) (rank 1 in comm 0): Fatal error in PMPI_Recv: Message truncated, error stack:
+PMPI_Recv(177).......................: MPI_Recv(buf=0x7ffd04ee69b0, count=99998, MPI_INT, src=0, tag=MPI_ANY_TAG, MPI_COMM_WORLD, status=0x1) failed
+MPIDI_CRAY_Common_lmt_handle_recv(55): Message from rank 3 and tag 1 truncated; 399992 bytes received but buffer size is 400000
+
+aborting job:
+Fatal error in PMPI_Recv: Message truncated, error stack:
+PMPI_Recv(177).......................: MPI_Recv(buf=0x7ffd04ee69b0, count=99998, MPI_INT, src=0, tag=MPI_ANY_TAG, MPI_COMM_WORLD, status=0x1) failed
+MPIDI_CRAY_Common_lmt_handle_recv(55): Message from rank 3 and tag 1 truncated; 399992 bytes received but buffer size is 400000
+MPICH ERROR [Rank 3] [job id 19488903.0] [Wed Jun 24 13:20:26 2026] [nid002510] - Abort(134860814) (rank 3 in comm 0): Fatal error in PMPI_Recv: Message truncated, error stack:
+PMPI_Recv(177).......................: MPI_Recv(buf=0x7ffe2305a680, count=99998, MPI_INT, src=2, tag=MPI_ANY_TAG, MPI_COMM_WORLD, status=0x1) failed
+MPIDI_CRAY_Common_lmt_handle_recv(55): Message from rank 1 and tag 1 truncated; 399992 bytes received but buffer size is 400000
+
+aborting job:
+Fatal error in PMPI_Recv: Message truncated, error stack:
+PMPI_Recv(177).......................: MPI_Recv(buf=0x7ffe2305a680, count=99998, MPI_INT, src=2, tag=MPI_ANY_TAG, MPI_COMM_WORLD, status=0x1) failed
+MPIDI_CRAY_Common_lmt_handle_recv(55): Message from rank 1 and tag 1 truncated; 399992 bytes received but buffer size is 400000
+srun: error: nid002510: tasks 1,3: Exited with exit code 255
+srun: Terminating StepId=19488903.0
+slurmstepd: error: *** STEP 19488903.0 ON nid002510 CANCELLED AT 2026-06-24T13:20:26 ***
+srun: error: nid002510: tasks 0,2: Terminated
+srun: Force Terminated StepId=19488903.0
