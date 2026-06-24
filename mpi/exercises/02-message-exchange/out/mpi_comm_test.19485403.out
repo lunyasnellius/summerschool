@@ -1,0 +1,4 @@
+On rank 0, the sent message is 0 and the received message is 3
+On rank 2, the sent message is 2 and the received message is 1
+On rank 3, the sent message is 3 and the received message is 2
+On rank 1, the sent message is 1 and the received message is 0
