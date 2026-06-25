@@ -15,7 +15,7 @@ void print_buffer(std::vector<int> &buffer);
 int main(int argc, char *argv[])
 {
     int size, rank, bufsize;
-    bufsize = 12;
+    bufsize = 12800;
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);

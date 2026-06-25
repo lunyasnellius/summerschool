@@ -6,4 +6,4 @@
 Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for this output (/opt/cray/pe/lmod/lmod/init/bash)
 Shell debugging restarted
 + unset __lmod_vx
-+ srun skeleton.o
++ srun skltn

@@ -32,19 +32,6 @@ int main(int argc, char *argv[])
     MPI_Barrier(MPI_COMM_WORLD);
     double t0 = MPI_Wtime();
 
-    MPI_Request request[size-1];
-    if(rank==0) {
-    /* Send everywhere from 0 */
-	    for(int i=1; i<size; ++i) {
-		    MPI_Isend(buf.data(), buf.size(), MPI_INT, 
-			    i, i, MPI_COMM_WORLD, &request[i-1]);
-	    }
-    } else {
-    /* Recv from 0 everywhere */
-	    MPI_Recv(buf.data(), buf.size(), MPI_INT, 
-		    0, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    }
-    if(rank == 0) MPI_Waitall(size-1, request, MPI_STATUS_IGNORE);
 
     MPI_Barrier(MPI_COMM_WORLD);
 
@@ -55,26 +42,6 @@ int main(int argc, char *argv[])
     print_buffer(buf);
     if (rank == 0) {
         printf("Time elapsed manual implementation: %6.8f s\n", t1 - t0);
-    }
-
-    /* Initialize message buffer */
-    init_buffer(buf);
-
-    /* Print data that will be sent */
-    print_buffer(buf);
-
-    MPI_Barrier(MPI_COMM_WORLD);
-    t0 = MPI_Wtime();
-
-    MPI_Bcast(buf.data(), buf.size(), MPI_INT, 0, MPI_COMM_WORLD);
-
-    MPI_Barrier(MPI_COMM_WORLD);
-    t1 = MPI_Wtime();
-
-    /* Print data that was received */
-    print_buffer(buf);
-    if (rank == 0) {
-        printf("Time elapsed using Bcast: %6.8f s\n", t1 - t0);
     }
 
     MPI_Finalize();

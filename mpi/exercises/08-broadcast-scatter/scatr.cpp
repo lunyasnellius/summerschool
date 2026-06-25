@@ -18,7 +18,8 @@ int main(int argc, char *argv[])
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    bufsize = 2 * size;
+    bufsize = 12800;// * size;
+    int sctrsize = bufsize / size;
 
     std::vector<int> buf(bufsize);
     std::vector<int> rbuf(bufsize);
@@ -37,17 +38,17 @@ int main(int argc, char *argv[])
     if(rank==0) {
     /* Send everywhere from 0 */
 	    for(int i=1; i<size; ++i) {
-		    MPI_Isend(&buf[i*2], 2, MPI_INT, 
+		    MPI_Isend(&buf[i*sctrsize], sctrsize, MPI_INT, 
 			    i, i, MPI_COMM_WORLD, &request[i-1]);
 	    }
     } else {
     /* Recv from 0 everywhere */
-	    MPI_Recv(buf.data(), 2, MPI_INT, 
+	    MPI_Recv(buf.data(), sctrsize, MPI_INT, 
 		    0, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     }
     if(rank == 0) {
 	    MPI_Waitall(size-1, request, MPI_STATUS_IGNORE);
-	    for(int i=2; i<bufsize; ++i) buf[i]=0;
+	    for(int i=sctrsize; i<bufsize; ++i) buf[i]=0;
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
     MPI_Barrier(MPI_COMM_WORLD);
     t0 = MPI_Wtime();
 
-    MPI_Scatter(buf.data(), 2, MPI_INT, rbuf.data(), 2, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(buf.data(), sctrsize, MPI_INT, rbuf.data(), sctrsize, MPI_INT, 0, MPI_COMM_WORLD);
     //MPI_Bcast(buf.data(), buf.size(), MPI_INT, 0, MPI_COMM_WORLD);
 
     MPI_Barrier(MPI_COMM_WORLD);
