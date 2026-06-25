@@ -34,17 +34,11 @@ int main(int argc, char** argv)
     double x = (i - 0.5) / n;
     pi += 1.0 / (1.0 + x*x);
   }
-  if(rank != 0) {
-    MPI_Send(&pi, 1, MPI_DOUBLE, 0, rank, MPI_COMM_WORLD);
-  } else {
-    printf("Computing approximation to pi with N=%d\n", n);
-    double pipart[size];
-    for(int i=1; i<size; ++i) {
-      MPI_Recv(&pipart[i], 1, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      pi += pipart[i];
-    }
+  double fullpi = 0.0;
+  MPI_Reduce(&pi, &fullpi, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
-    pi *= 4.0 / n;
+  if(rank == 0) {
+    pi = fullpi * 4.0 / n;
     printf("Approximate pi=%18.16f (exact pi=%10.8f)\n", pi, M_PI);
   }
 
