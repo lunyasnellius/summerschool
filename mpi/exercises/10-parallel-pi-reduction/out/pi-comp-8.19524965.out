@@ -1,0 +1,3 @@
+Using Reduce: Approximate pi=3.1415927716925904 (exact pi=3.14159265)
+Using Allreduce: Approximate pi=3.1415927716925904 (exact pi=3.14159265)
+Using MPI_IN_PLACE: Approximate pi=3.1415927716925904 (exact pi=3.14159265)
