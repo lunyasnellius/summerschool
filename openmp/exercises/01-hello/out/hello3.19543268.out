@@ -1,0 +1,6 @@
+Hello world!
+Hello from thread 2!
+Hello from thread 1!
+Hello from thread 3!
+Hello from thread 0!
+Total number of threads = 4

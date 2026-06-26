@@ -3,15 +3,24 @@
 // SPDX-License-Identifier: MIT
 
 #include <cstdio>
+#include <omp.h>
 
 int main()
 {
     printf("Hello world!\n");
 
-    #pragma omp parallel
+    int nums = 1;
+    int threadnum = 1;
+    #pragma omp parallel private(threadnum)
     {
-        printf("Hello from thread!\n");
+#ifdef _OPENMP
+	    nums = omp_get_num_threads();
+	    threadnum = omp_get_thread_num();
+#endif
+	    printf("Hello from thread %i!\n", threadnum);
     }
+
+    printf("Total number of threads = %i\n", nums);
 
     return 0;
 }

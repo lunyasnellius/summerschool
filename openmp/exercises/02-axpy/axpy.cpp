@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include "helper_functions.hpp"
-
+#include <omp.h>
 
 int main(int argc, char* argv[]) {
     // Array size
@@ -32,16 +32,29 @@ int main(int argc, char* argv[]) {
     printf("a = %8.4f\n", alpha);
     print_array("x", x);
     print_array("y", y);
-
+    int numthreads = 1;
+#ifdef _OPENMP
+    double t0 = omp_get_wtime();
+#endif
     // Calculate axpy
-    // TODO: Add OpenMP directives for parallelization
+    // Add OpenMP directives for parallelization
+#pragma omp parallel for
     for (int i = 0; i < n; i++) {
         y[i] += alpha * x[i];
+#ifdef _OPENMP
+	numthreads = omp_get_num_threads();
+#endif
     }
+#ifdef _OPENMP
+    double t1 = omp_get_wtime();
+#endif
 
     // Print output values
     printf("Output:\n");
     print_array("y", y);
+#ifdef _OPENMP
+    printf("time passed in parallel: %.6f\nnumber of threads: %i\n", (t1-t0), numthreads);
+#endif
 
     return 0;
 }
