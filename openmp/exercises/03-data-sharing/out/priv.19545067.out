@@ -1,0 +1,10 @@
+Main thread: initial var = 42
+Thread    0: initial var = 2389056
+Thread    0:   final var = 0
+Thread    2: initial var = 2389056
+Thread    2:   final var = 2
+Thread    1: initial var = 2389056
+Thread    1:   final var = 1
+Thread    3: initial var = 2389056
+Thread    3:   final var = 3
+Main thread:   final var = 42

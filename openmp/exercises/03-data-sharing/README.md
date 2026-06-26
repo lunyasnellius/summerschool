@@ -47,4 +47,6 @@ The [solution directory](solution/) contains a model solution and discussion on 
    What is the output now?
 
 5. Add `default(none)` clause for the parallel directive. What happens if no data-sharing
-   clause is defined for `var`?
+   clause is defined for `var`? 
+     -> it doesnt compile, since the variable would not be available in the thread 
+        parallel region otherwise.
