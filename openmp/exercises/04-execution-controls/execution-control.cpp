@@ -12,9 +12,15 @@ int main(void)
     printf("Main thread: initial var = %d\n", var);
     #pragma omp parallel firstprivate(var)
     {
-        printf("Thread  %3d: initial var = %d\n", omp_get_thread_num(), var);
-        var = omp_get_thread_num();
-        printf("Thread  %3d:   final var = %d\n", omp_get_thread_num(), var);
+	// // solution to print last without masked
+	//int tn = omp_get_thread_num();
+	//int nt = omp_get_num_threads();
+	//if(tn > nt-4)
+	int before = var;
+    var = omp_get_thread_num();
+    printf("Thread  %3d: initial var = %d\nThread  %3d:   final var = %d\n", 
+	omp_get_thread_num(), before, omp_get_thread_num(), var);
+
     }
     printf("Main thread:   final var = %d\n", var);
 

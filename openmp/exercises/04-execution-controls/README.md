@@ -18,6 +18,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
 1. Use the `masked` or `master` clause so that only thread 0 prints the initial value within the parallel region.
    Run the program multiple times. Do other threads wait for the masked print to finish?
+    NO, they dont wait
 
    Note: `masked` is defined in OpenMP 5.1, so using it requires a supporting compiler.
    Be sure to compile with `-Wall` (or `-Wunknown-pragmas`) to see if the compiler supports it.
@@ -28,9 +29,12 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
 3. Use the `single` clause so that only a single (but any) thread prints the initial value.
    Run the program multiple times. Do other threads wait for the single print to finish?
+    yes. and the sinled thread is always 0...
 
 4. Add `nowait` clause to the `single` clause.
    Do the other threads now wait for the single print to finish?
+    they still wait for the single to finish, but the thread thats singled is no longer 
+    fixed to be thread 0
 
 
 ## Task: Synchronization
