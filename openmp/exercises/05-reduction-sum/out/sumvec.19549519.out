@@ -1,0 +1,7 @@
+/usr/bin/sum: 1: No such file or directory
+/usr/bin/sum: 3: No such file or directory
+/usr/bin/sum: 4: No such file or directory
+/usr/bin/sum: 4: No such file or directory
+/usr/bin/sum: 3: No such file or directory
+srun: error: nid002464: task 0: Exited with exit code 1
+srun: Terminating StepId=19549519.0
