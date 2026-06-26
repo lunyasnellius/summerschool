@@ -8,16 +8,31 @@
 
 int main(int argc, char *argv[])
 {
-	MPI_Init(&argc, &argv);
+	int provided, required;
+	required = MPI_THREAD_FUNNELED;
+	MPI_Init_thread(&argc, &argv, required, &provided);
+
+	if(provided < required) {
+		printf("not supporting required thread level\n");
+		MPI_Abort(MPI_COMM_WORLD, -1);
+		return 0;
+	}
 
 	int rank = 0;
-
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	#pragma omp parallel
 	{
 		int tid = omp_get_thread_num();
 		printf("Hello from thread %d in process %d!\n", tid, rank);
+	}
+
+	if (rank == 0) {
+		printf("\nProvided thread support level: %d\n", provided);
+		printf("  %d - MPI_THREAD_SINGLE\n", MPI_THREAD_SINGLE);
+		printf("  %d - MPI_THREAD_FUNNELED\n", MPI_THREAD_FUNNELED);
+		printf("  %d - MPI_THREAD_SERIALIZED\n", MPI_THREAD_SERIALIZED);
+		printf("  %d - MPI_THREAD_MULTIPLE\n", MPI_THREAD_MULTIPLE);
 	}
 
 	MPI_Finalize();
