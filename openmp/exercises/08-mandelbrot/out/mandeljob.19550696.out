@@ -1,0 +1,67 @@
+adaptive:
+Image size: 32x32
+Calculation took 0.641 milliseconds
+Writing file took 1.628 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 64x64
+Calculation took 1.521 milliseconds
+Writing file took 1.441 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 128x128
+Calculation took 3.371 milliseconds
+Writing file took 1.377 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 256x256
+Calculation took 9.932 milliseconds
+Writing file took 1.495 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 512x512
+Calculation took 26.727 milliseconds
+Writing file took 2.945 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 1024x1024
+Calculation took 75.634 milliseconds
+Writing file took 3.051 milliseconds
+Mandelbrot data saved to image.bin
+blocked:
+Image size: 32x32
+Calculation took 0.580 milliseconds
+Writing file took 2.278 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 64x64
+Calculation took 2.714 milliseconds
+Writing file took 2.023 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 128x128
+Calculation took 9.955 milliseconds
+Writing file took 2.101 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 256x256
+Calculation took 39.967 milliseconds
+Writing file took 2.289 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 512x512
+Calculation took 156.164 milliseconds
+Writing file took 2.488 milliseconds
+Mandelbrot data saved to image.bin
+direct:
+Image size: 32x32
+Calculation took 0.575 milliseconds
+Writing file took 3.267 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 64x64
+Calculation took 2.385 milliseconds
+Writing file took 2.008 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 128x128
+Calculation took 9.569 milliseconds
+Writing file took 2.126 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 256x256
+Calculation took 39.638 milliseconds
+Writing file took 1.886 milliseconds
+Mandelbrot data saved to image.bin
+Image size: 512x512
+Calculation took 156.761 milliseconds
+Writing file took 2.385 milliseconds
+Mandelbrot data saved to image.bin

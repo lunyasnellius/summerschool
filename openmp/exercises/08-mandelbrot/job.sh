@@ -17,4 +17,6 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 #export OMP_PLACES=threads
 
 # Run the program
-srun "$@"
+srun --exclusive "$@"
+
+
