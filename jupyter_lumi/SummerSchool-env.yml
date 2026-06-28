@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+#
+# SPDX-License-Identifier: MIT
+
+channels:
+  - conda-forge
+dependencies:
+  - jupyter
+  - jupyterlab
+  - nbclassic
+  - python=3.12
+  - ipykernel
+  - scipy
+  - nglview
+  - matplotlib
+  - pandas
+  - matplotlib-scalebar
+  - numpy
+  - ipywidgets
+  - ipympl
