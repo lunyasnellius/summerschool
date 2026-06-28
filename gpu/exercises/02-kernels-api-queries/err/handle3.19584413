@@ -1,0 +1,12 @@
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_vx=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for this output (/opt/cray/pe/lmod/lmod/init/bash)
+Shell debugging restarted
++ unset __lmod_vx
++ srun ./handle
+threads.y is not within correct limits: 30000 not in range [1,1024], for kernel "hello" in main.cpp on line 25
+srun: error: nid007861: task 0: Exited with exit code 1
+srun: Terminating StepId=19584413.0

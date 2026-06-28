@@ -31,19 +31,21 @@ int main(int argc, char **argv) {
     // HIP_ERRCHK(hipApiCall(args));
 
     int count = 0;
-    auto result = hipGetDeviceCount(&count);
+    HIP_ERRCHK(hipGetDeviceCount(&count));
 
     int device = 0;
-    result = hipGetDevice(&device);
+    HIP_ERRCHK(hipGetDevice(&device));
 
-    result = hipSetDevice(2);
+    HIP_ERRCHK(hipSetDevice(device));
 
     void *ptr = nullptr;
-    result = hipMalloc(nullptr, 99999999999);
+    const size_t Nentries = 320;
+    const size_t bytesize = Nentries * sizeof(double);
+    HIP_ERRCHK(hipMalloc(&ptr, bytesize));
 
-    result = hipMemset(nullptr, 0, 8);
+    HIP_ERRCHK(hipMemset(ptr, 0, 8 * sizeof(double)));
 
-    result = hipFree(ptr);
+    HIP_ERRCHK(hipFree(ptr));
 
     return 0;
 }
