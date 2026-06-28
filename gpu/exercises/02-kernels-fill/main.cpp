@@ -9,32 +9,46 @@
 #include "../error_checking.hpp"
 
 __global__ void fill(float *arr, float a, size_t num_values) {
-    // TODO: Fill the array 'arr' with the constant 'a'.
+    // Fill the array 'arr' with the constant 'a'.
     // Assume the array size is 'num_values'
     // Consult earlier exercises where we launched kernels and the lecture
     // slides for help
+	const int tid = threadIdx.x + blockIdx.x * blockDim.x;
+	const int stride = blockDim.x * gridDim.x;
+
+	for (int i = tid; i < num_values; i += stride) {
+		arr[i] = a;
+	}
 }
 
-int main() {
+int main(int argc, char ** argv) {
     static constexpr size_t num_values = 1000000;
     static constexpr size_t num_bytes = sizeof(float) * num_values;
     static constexpr float a = 3.4f;
 
-    float *d_arr = nullptr;
-    // TODO: Allocate memory on the GPU
-    // - hipMalloc
+    int32_t device = 0;
+    HIP_ERRCHK(hipGetDevice(&device));
 
-    // TODO: Define grid dimensions + launch the device kernel
-    int threads = 0;
-    int blocks = 0;
-    LAUNCH_KERNEL(fill, blocks, threads, 0, 0, d_arr, a, num_values);
+    float *d_arr = nullptr;
+    // Allocate memory on the GPU
+    HIP_ERRCHK(hipMalloc(&d_arr, num_bytes));
+
+    // Define grid dimensions + launch the device kernel
+    const int32_t blocks = std::atoi(argv[1]);
+    const int32_t threads = std::atoi(argv[2]);
+
+    LAUNCH_KERNEL(fill, dim3(blocks), dim3(threads), 0, 0, d_arr, a, num_values);
+
+    //HIP_ERRCHK(hipDeviceSynchronize());
 
     float *h_arr = static_cast<float *>(std::malloc(num_bytes));
-    // TODO: Copy results back to CPU
-    // - hipMemcpy
+    // Copy results back to CPU
+    HIP_ERRCHK(hipMemcpy(h_arr, d_arr, num_bytes, hipMemcpyDefault));
 
-    // TODO: Free device memory
-    // - hipFree
+    //HIP_ERRCHK(hipDeviceSynchronize());
+
+    // Free device memory
+    HIP_ERRCHK(hipFree(d_arr));
 
     printf("Some values copied from the GPU: %f, %f, %f, %f\n", h_arr[0],
            h_arr[1], h_arr[num_values - 2], h_arr[num_values - 1]);

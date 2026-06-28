@@ -1,0 +1,2 @@
+Error with kernel "fill" in main.cpp at line 48
+hipErrorInvalidConfiguration: invalid configuration argument

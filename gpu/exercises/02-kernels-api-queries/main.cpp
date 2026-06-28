@@ -15,7 +15,7 @@ __global__ void hello() {
 }
 
 int main(int argc, char **argv) {
-    // TODO 2: After completing the error checking in the separate file
+    // After completing the error checking in the separate file
     // fix any errors with this launch.
     // To do that,
     // - compile the program
