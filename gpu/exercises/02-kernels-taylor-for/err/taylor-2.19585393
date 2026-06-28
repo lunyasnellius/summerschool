@@ -1,0 +1,22 @@
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_vx=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for this output (/opt/cray/pe/lmod/lmod/init/bash)
+Shell debugging restarted
++ unset __lmod_vx
++ echo 'input 10/100'\''000/1024'
++ srun ./taylor 10 100000 1024
++ echo 'input 10/1'\''000'\''000/1024'
++ srun ./taylor 10 1000000 1024
++ echo 'input 100/100'\''000/1024'
++ srun ./taylor 100 100000 1024
+taylor: main.cpp:166: int main(int, char **): Assertion `num_iters > 0 && num_iters <= 50 && "Use values up to 50"' failed.
+srun: error: nid005029: task 0: Aborted (core dumped)
+srun: Terminating StepId=19585393.2
++ echo 'input 100/1'\''000'\''000/1024'
++ srun ./taylor 100 1000000 1024
+taylor: main.cpp:166: int main(int, char **): Assertion `num_iters > 0 && num_iters <= 50 && "Use values up to 50"' failed.
+srun: error: nid005029: task 0: Aborted
+srun: Terminating StepId=19585393.3

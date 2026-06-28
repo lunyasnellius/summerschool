@@ -69,11 +69,15 @@ __global__ void taylor_for_consecutive(float *x, float *y, size_t num_values,
 
 __global__ void taylor_for_strided(float *x, float *y, size_t num_values,
                                    size_t num_iters) {
-    // TODO: Fill in this kernel
-    // Check the lecture slides for HIP kernels for an example on how to do a
+    // Global thread id, i.e. over the entire grid
+    const size_t tid = threadIdx.x + blockIdx.x * blockDim.x;
+
+    // Stride
+    const int stride = blockDim.x * gridDim.x;
+
     // strided for loop
 
-    for (size_t i = ???; /*TODO: fill me in*/) {
+    for (size_t i = tid; i < num_values; i += stride) {
         y[i] = taylor(x[i], num_iters);
     }
 }

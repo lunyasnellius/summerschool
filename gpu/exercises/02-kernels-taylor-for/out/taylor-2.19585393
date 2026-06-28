@@ -1,0 +1,8 @@
+input 10/100'000/1024
+Taylor N, vector size, number of threads, base[us], strided[us], consecutive[us]
+10, 100000, 1024, 15, 16, 17
+input 10/1'000'000/1024
+Taylor N, vector size, number of threads, base[us], strided[us], consecutive[us]
+10, 1000000, 1024, 37, 39, 39
+input 100/100'000/1024
+input 100/1'000'000/1024
