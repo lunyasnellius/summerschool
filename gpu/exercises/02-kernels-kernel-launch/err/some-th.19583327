@@ -1,0 +1,134 @@
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_vx=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for this output (/opt/cray/pe/lmod/lmod/init/bash)
+Shell debugging restarted
++ unset __lmod_vx
++ srun ./assert 1 1
++ srun ./assert 1 2
++ srun ./assert 2 1
++ srun ./assert 1 10
++ srun ./assert 10 1
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+Failed to allocate file: Bad file descriptor
+GPU core dump failed
+:0:rocdevice.cpp            :3020: 5095646796646d us:  Callback: Queue 0x154520600000 aborting with error : HSA_STATUS_ERROR_EXCEPTION: An HSAIL operation resulted in a hardware exception. code: 0x1016
+srun: error: nid007861: task 0: Aborted (core dumped)
+srun: Terminating StepId=19583327.4
++ srun ./assert 10 10
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+main.cpp:10: void hello(int32_t, int32_t): Device-side assertion `num_blocks != 10' failed.
+Failed to allocate file: Bad file descriptor
+GPU core dump failed
+:0:rocdevice.cpp            :3020: 5095647931446d us:  Callback: Queue 0x14d450e00000 aborting with error : HSA_STATUS_ERROR_EXCEPTION: An HSAIL operation resulted in a hardware exception. code: 0x1016
+srun: error: nid007861: task 0: Aborted
+srun: Terminating StepId=19583327.5

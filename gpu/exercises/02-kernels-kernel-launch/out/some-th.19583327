@@ -1,0 +1,19 @@
+Launching with 1 blocks and 1 threads
+Hello world, this is kernel speaking! Thread 0[block 0, thread 0] out of 1 is printing this message
+Launching with 1 blocks and 2 threads
+Hello world, this is kernel speaking! Thread 0[block 0, thread 0] out of 2 is printing this message
+Hello world, this is kernel speaking! Thread 1[block 0, thread 1] out of 2 is printing this message
+Launching with 2 blocks and 1 threads
+Hello world, this is kernel speaking! Thread 0[block 0, thread 0] out of 2 is printing this message
+Hello world, this is kernel speaking! Thread 1[block 1, thread 0] out of 2 is printing this message
+Launching with 1 blocks and 10 threads
+Hello world, this is kernel speaking! Thread 0[block 0, thread 0] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 1[block 0, thread 1] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 2[block 0, thread 2] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 3[block 0, thread 3] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 4[block 0, thread 4] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 5[block 0, thread 5] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 6[block 0, thread 6] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 7[block 0, thread 7] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 8[block 0, thread 8] out of 10 is printing this message
+Hello world, this is kernel speaking! Thread 9[block 0, thread 9] out of 10 is printing this message

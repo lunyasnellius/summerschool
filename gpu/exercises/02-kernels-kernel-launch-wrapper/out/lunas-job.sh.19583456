@@ -1,0 +1,39 @@
+some different combos
+Launching with 1 blocks and 1 threads
+Hello world, this is kernel speaking!
+ 1 * 1 = 1 threads are printing this message
+Launching with 1 blocks and 2 threads
+Hello world, this is kernel speaking!
+ 1 * 2 = 2 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 2 = 2 threads are printing this message
+Launching with 2 blocks and 1 threads
+Hello world, this is kernel speaking!
+ 2 * 1 = 2 threads are printing this message
+Hello world, this is kernel speaking!
+ 2 * 1 = 2 threads are printing this message
+Launching with 1 blocks and 10 threads
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+Hello world, this is kernel speaking!
+ 1 * 10 = 10 threads are printing this message
+with 1025 threads
+Launching with 10 blocks and 1025 threads
+Error with kernel "hello" in main.cpp at line 35
+hipErrorInvalidValue: invalid argument
