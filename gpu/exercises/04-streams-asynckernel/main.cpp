@@ -85,7 +85,11 @@ int main() {
   b = (float*) malloc(N_bytes);
   c = (float*) malloc(N_bytes);
 
-  #error create three separate streams
+  hipStream_t stream[3];
+
+  for(int i=0; i<3; ++i) 
+	  HIP_ERRCHK(hipStreamCreate(&stream[i]));
+  //#error create three separate streams
 
   // Device allocations
   HIP_ERRCHK(hipMalloc((void**)&d_a, N_bytes));
@@ -98,23 +102,26 @@ int main() {
   HIP_ERRCHK(hipDeviceSynchronize());
 
   // Execute kernels in sequence
-  #error Launch each kernel in a different stream
-  kernel_a<<<gridsize, blocksize,0,0>>>(d_a, N);
+  //#error Launch each kernel in a different stream
+  kernel_a<<<gridsize, blocksize,0,stream[0]>>>(d_a, N);
   HIP_ERRCHK(hipGetLastError());
 
-  kernel_b<<<gridsize, blocksize,0,0>>>(d_b, N);
+  kernel_b<<<gridsize, blocksize,0,stream[1]>>>(d_b, N);
   HIP_ERRCHK(hipGetLastError());
 
-  kernel_c<<<gridsize, blocksize,0,0>>>(d_c, N);
+  kernel_c<<<gridsize, blocksize,0,stream[2]>>>(d_c, N);
   HIP_ERRCHK(hipGetLastError());
 
   // Copy results back (in the default stream with hipMemCpy)
-  #error synchronize the host with stream A, before copying d_A back
-  HIP_ERRCHK(hipMemcpy(a, d_a, N_bytes, hipMemcpyDefault));
-  #error synchronize the host with stream B, before copying d_B back
-  HIP_ERRCHK(hipMemcpy(b, d_b, N_bytes, hipMemcpyDefault));
-  #error synchronize the host with stream C, before copying d_C back
-  HIP_ERRCHK(hipMemcpy(c, d_c, N_bytes, hipMemcpyDefault));
+  //#error synchronize the host with stream A, before copying d_A back
+  HIP_ERRCHK(hipStreamSynchronize(stream[0]));
+  HIP_ERRCHK(hipMemcpyAsync(a, d_a, N_bytes, hipMemcpyDefault, stream[0]));
+  //#error synchronize the host with stream B, before copying d_B back
+  HIP_ERRCHK(hipStreamSynchronize(stream[1]));
+  HIP_ERRCHK(hipMemcpyAsync(b, d_b, N_bytes, hipMemcpyDefault, stream[1]));
+  //#error synchronize the host with stream C, before copying d_C back
+  HIP_ERRCHK(hipStreamSynchronize(stream[2]));
+  HIP_ERRCHK(hipMemcpyAsync(c, d_c, N_bytes, hipMemcpyDefault, stream[2]));
 
   for (int i = 0; i < 10; ++i) printf("%f ", a[i]);
   printf("\n");
@@ -129,7 +136,9 @@ int main() {
   HIP_ERRCHK(hipFree(d_b));
   HIP_ERRCHK(hipFree(d_c));
 
-  #error destroy all streams
+  //#error destroy all streams
+  for(int i=0; i<3; ++i) 
+	  HIP_ERRCHK(hipStreamDestroy(stream[i]));
 
   free(a);
   free(b);

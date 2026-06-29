@@ -1,0 +1,12 @@
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_vx=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for this output (/opt/cray/pe/lmod/lmod/init/bash)
+Shell debugging restarted
++ unset __lmod_vx
++ srun rocprofv3 --runtime-trace --output-format pftrace -- ./streams
+[049.545]       perfetto.cc:47314 Configured tracing session 1, #sources:1, duration:0 ms, #buffers:1, total buffer size:1024000 KB, total sessions:1, uid:0 session name: ""
+[0;31mE20260629 15:08:53.250808 22575179390848 output_file.cpp:102] Opened result file: /pfs/lustrep1/scratch/project_462001452/meyerl/summerschool/gpu/exercises/04-streams-asynckernel/nid005119/81816_results.pftrace
+[m[049.548]       perfetto.cc:48889 Tracing session 1 ended, total sessions:0
