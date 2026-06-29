@@ -29,7 +29,8 @@ template <typename... Args>
 void launch_kernel(const char *kernel_name, const char *file, int32_t line,
                    void (*kernel)(Args...), dim3 blocks, dim3 threads,
                    size_t num_bytes_shared_mem, hipStream_t stream,
-                   Args... args) {
+		   float *a, int n){
+                   //Args... args) {
 #if !NDEBUG
     int32_t device = 0;
     HIP_ERRCHK(hipGetDevice(&device));
@@ -97,7 +98,7 @@ void launch_kernel(const char *kernel_name, const char *file, int32_t line,
     [[maybe_unused]] auto result = hipGetLastError();
 #endif
 
-    kernel<<<blocks, threads, num_bytes_shared_mem, stream>>>(args...);
+    kernel<<<blocks, threads, num_bytes_shared_mem, stream>>>(a, n);
 
 #if !NDEBUG
     // Quoting from HIP documentation

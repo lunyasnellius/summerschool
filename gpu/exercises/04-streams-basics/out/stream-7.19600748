@@ -1,0 +1,2 @@
+Error with kernel "kernel" in main.cpp at line 67
+hipErrorInvalidDeviceFunction: invalid device function
