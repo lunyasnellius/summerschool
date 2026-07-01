@@ -1,0 +1,6 @@
+Reading input from ../../../../heat-shared/data/bottle.dat
+Simulation parameters: rows: 200 columns: 200 time steps: 500
+Number of MPI tasks: 4
+Average temperature at start: 86.513850
+Iteration took 0.021526 seconds.
+Average temperature: 86.516295

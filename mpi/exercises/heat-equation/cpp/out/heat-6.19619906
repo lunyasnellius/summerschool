@@ -1,0 +1,5 @@
+Simulation parameters: rows: 8000 columns: 2000 time steps: 500
+Number of MPI tasks: 16
+Average temperature at start: 47.077962
+Iteration took 8.076035 seconds.
+Average temperature: 46.997851

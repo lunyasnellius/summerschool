@@ -44,17 +44,23 @@ int main(int argc, char **argv)
     // Largest stable time step
     auto dt = dx2 * dy2 / (2.0 * a * (dx2 + dy2));
 
+    MPI_Request requests[4];
+
     //Get the start time stamp
     auto start_clock = MPI_Wtime();
 
     // Time evolve
     for (int iter = 1; iter <= nsteps; iter++) {
-        exchange(previous, parallelization);
+        exchange(previous, parallelization, requests);
         evolve(current, previous, a, dt);
         if (iter % image_interval == 0) {
             write_field(current, iter, parallelization);
         }
-        // Swap current field so that it will be used
+	wait(requests);
+        evolve_surface(current, previous, a, dt);
+
+
+	// Swap current field so that it will be used
         // as previous for next iteration step
         std::swap(current, previous);
     }

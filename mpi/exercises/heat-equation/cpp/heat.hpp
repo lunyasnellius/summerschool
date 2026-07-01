@@ -12,21 +12,51 @@ struct ParallelData {
     int size;            // Number of MPI tasks
     int rank;
     int nup, ndown;      // Ranks of neighbouring MPI tasks
+	MPI_Comm cart_comm;
+	int nleft=0, nright=0;
 
     ParallelData() {      // Constructor
-
-      // TODO start: query number of MPI tasks and store it in
+      // start: query number of MPI tasks and store it in
       // the size attribute of the class
+	    MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+	    constexpr int n_dims = 1;	// number of dims
+	    int dims[n_dims] = {0};	// MPI splits tasks onto the number of dims
+	    int periods[n_dims] = {1};	// true = 1 = periodic boundary 
+					// false = 0 = not periodic
+
+	    MPI_Dims_create(size, n_dims, dims);
+	    MPI_Cart_create(MPI_COMM_WORLD, n_dims, dims, periods, 
+			    1, &cart_comm); 	// bool = 1 = MPI can reorder tasks
       // Query MPI rank of this task and store it in the rank attribute
-      // Determine also up and down neighbours of this domain and store
-      // them in nup and ndown attributes, remember to cope with
-      // boundary domains appropriatly
+	    MPI_Comm_rank(cart_comm, &rank);
 
-      nup =
-      ndown =
+      // Determine up and down neighbours of this domain
+	    MPI_Cart_shift(cart_comm, 0, 1, &nup, &ndown);
 
-      // TODO end
+    };
+
+    ParallelData(int in_dims) {      // Constructor
+      // start: query number of MPI tasks and store it in
+      // the size attribute of the class
+	    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+	    constexpr int n_dims = in_dims;	// number of dims
+	    int dims[n_dims];			// MPI splits tasks onto the number of dims
+	    int periods[n_dims];		// true = 1 = periodic boundary 
+						// false = 0 = not periodic
+
+	    for (int i=0; i<n_dims; ++i) periods[i]=1;
+
+	    MPI_Dims_create(size, n_dims, dims);
+	    MPI_Cart_create(MPI_COMM_WORLD, n_dims, dims, periods, 
+			    1, &cart_comm); 	// bool = 1 = MPI can reorder tasks
+      // Query MPI rank of this task and store it in the rank attribute
+	    MPI_Comm_rank(cart_comm, &rank);
+
+      // Determine up and down neighbours of this domain
+	    MPI_Cart_shift(cart_comm, 0, 1, &nup, &ndown);
+	    MPI_Cart_shift(cart_comm, 1, 1, &nleft, &nright);
 
     };
 
@@ -61,9 +91,13 @@ struct Field {
 void initialize(int argc, char *argv[], Field& current,
                 Field& previous, int& nsteps, ParallelData parallel);
 
-void exchange(Field& field, const ParallelData parallel);
+void exchange(Field& field, const ParallelData parallel, MPI_Request* requests);
+
+void wait(MPI_Request* request);
 
 void evolve(Field& curr, const Field& prev, const double a, const double dt);
+
+void evolve_surface(Field& curr, const Field& prev, const double a, const double dt);
 
 void write_field(const Field& field, const int iter, const ParallelData parallel);
 

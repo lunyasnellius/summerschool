@@ -40,15 +40,14 @@ void Field::generate(ParallelData parallel) {
         }
     }
 
-    // Boundary conditions
+    // Boundary conditions in y-direction
     for (int i = 0; i < nx + 2; i++) {
         // Left
         temperature(i, 0) = 20.0;
         // Right
         temperature(i, ny + 1) = 70.0;
     }
-
-    // Top
+/*    // Top
     if (0 == parallel.rank) {
         for (int j = 0; j < ny + 2; j++) {
             temperature(0, j) = 85.0;
@@ -60,4 +59,5 @@ void Field::generate(ParallelData parallel) {
             temperature(nx + 1, j) = 5.0;
         }
     }
+*/
 }
